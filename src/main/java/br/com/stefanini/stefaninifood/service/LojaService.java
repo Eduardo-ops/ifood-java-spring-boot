@@ -1,5 +1,6 @@
 package br.com.stefanini.stefaninifood.service;
 
+import br.com.stefanini.stefaninifood.dto.loja.AtualizarLojaDto;
 import br.com.stefanini.stefaninifood.dto.loja.LojaDto;
 import br.com.stefanini.stefaninifood.dto.loja.LojaFormDto;
 import br.com.stefanini.stefaninifood.model.Loja;
@@ -57,6 +58,14 @@ public class LojaService {
 //        lojaById.setCnpj(loja.getCnpj());
 //        return this.lojaRepository.save(lojaById);
     }
+
+    @Transactional
+    public Loja converterAtualizar(Long id, AtualizarLojaDto atualizarLojaDto) {
+        Loja loja = buscarPorId(id);
+        BeanUtils.copyProperties(atualizarLojaDto, loja);
+        return loja;
+    }
+
 
     @Transactional
     public void removerLoja(Loja loja) {

@@ -1,9 +1,23 @@
 package br.com.stefanini.stefaninifood.dto.loja;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class LojaFormDto {
 
+    @NotNull
+    @NotEmpty
+    @Length(max = 20)
     private String nome;
+    @NotNull
+    @NotEmpty
+    @Length(max = 80)
     private String endereco;
+    @NotNull
+    @NotEmpty
+    @Length(min = 18, max = 18)
     private String cnpj;
 
     public String getNome() {

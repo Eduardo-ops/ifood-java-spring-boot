@@ -1,5 +1,6 @@
 package br.com.stefanini.stefaninifood.controller;
 
+import br.com.stefanini.stefaninifood.dto.loja.AtualizarLojaDto;
 import br.com.stefanini.stefaninifood.dto.loja.DetalhesLojaDto;
 import br.com.stefanini.stefaninifood.dto.loja.LojaDto;
 import br.com.stefanini.stefaninifood.dto.loja.LojaFormDto;
@@ -42,8 +43,9 @@ public class LojaController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarLoja(@PathVariable Long id, @RequestBody Loja loja) {
-        lojaService.atualizarLoja(id, loja);
+    public void atualizarLoja(@PathVariable Long id, @RequestBody AtualizarLojaDto atualizarLojaDto) {
+        Loja loja = this.lojaService.converterAtualizar(id, atualizarLojaDto);
+        new LojaDto(lojaService.atualizarLoja(id, loja));
     }
 
     @DeleteMapping("/{id}")

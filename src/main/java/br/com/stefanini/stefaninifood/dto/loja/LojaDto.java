@@ -1,36 +1,34 @@
-package br.com.stefanini.stefaninifood.model;
+package br.com.stefanini.stefaninifood.dto.loja;
 
-import javax.persistence.*;
+import br.com.stefanini.stefaninifood.model.Loja;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "loja")
-public class Loja {
+public class LojaDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "nome")
     private String nome;
-    @Column(name = "razao_social")
     private String razaoSocial;
-    @Column(name = "endereco")
     private String endereco;
-    @Column(name = "cnpj")
     private String cnpj;
+    private LocalDateTime dataDeRegistro;
 
-    public Loja() {
+    public LojaDto() {
     }
 
-    public Loja(String nome, String endereco, String cnpj) {
-        this.nome = nome;
-        this.endereco = endereco;
-        this.cnpj = cnpj;
+    public LojaDto(Loja loja) {
+        this.id = loja.getId();
+        this.nome = loja.getNome();
+        this.razaoSocial = loja.getRazaoSocial();
+        this.endereco = loja.getEndereco();
+        this.cnpj = loja.getCnpj();
+        this.dataDeRegistro = loja.getDataDeRegistro();
     }
-
-    @Column(name = "data_de_registro")
-    private LocalDateTime dataDeRegistro = LocalDateTime.now();
 
     public Long getId() {
         return id;

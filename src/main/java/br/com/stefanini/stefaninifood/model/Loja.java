@@ -2,6 +2,7 @@ package br.com.stefanini.stefaninifood.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "loja")
@@ -19,14 +20,18 @@ public class Loja {
     private String endereco;
     @Column(name = "cnpj")
     private String cnpj;
+    @ManyToMany
+    @Column(name = "produtos")
+    private List<Produto> produtos;
 
     public Loja() {
     }
 
-    public Loja(String nome, String endereco, String cnpj) {
+    public Loja(String nome, String endereco, String cnpj, List<Produto> produtos) {
         this.nome = nome;
         this.endereco = endereco;
         this.cnpj = cnpj;
+        this.produtos = produtos;
     }
 
     @Column(name = "data_de_registro")
@@ -78,5 +83,13 @@ public class Loja {
 
     public void setDataDeRegistro(LocalDateTime dataDeRegistro) {
         this.dataDeRegistro = dataDeRegistro;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

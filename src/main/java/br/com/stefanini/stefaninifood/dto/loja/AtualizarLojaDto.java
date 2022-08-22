@@ -1,16 +1,20 @@
 package br.com.stefanini.stefaninifood.dto.loja;
 
 import br.com.stefanini.stefaninifood.model.Loja;
+import br.com.stefanini.stefaninifood.model.Produto;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class AtualizarLojaDto {
-    @Length(max = 20)
-    private String razaoSocial;
     @Length(max = 40)
+    private String razaoSocial;
+    @Length(max = 60)
     private String endereco;
+
+    private Long idProduto;
+
+    private List<Produto> produtos;
 
     public AtualizarLojaDto() {
     }
@@ -18,6 +22,7 @@ public class AtualizarLojaDto {
     public AtualizarLojaDto(Loja loja) {
         this.razaoSocial = loja.getRazaoSocial();
         this.endereco = loja.getEndereco();
+        this.produtos = loja.getProdutos();
     }
 
     public String getRazaoSocial() {
@@ -34,5 +39,21 @@ public class AtualizarLojaDto {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

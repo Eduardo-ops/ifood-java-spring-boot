@@ -1,11 +1,13 @@
 package br.com.stefanini.stefaninifood.dto.loja;
 
 import br.com.stefanini.stefaninifood.model.Loja;
+import br.com.stefanini.stefaninifood.model.Produto;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class LojaDto {
 
@@ -18,6 +20,8 @@ public class LojaDto {
     private String cnpj;
     private LocalDateTime dataDeRegistro;
 
+    private List<Produto> produtos;
+
     public LojaDto() {
     }
 
@@ -28,6 +32,7 @@ public class LojaDto {
         this.endereco = loja.getEndereco();
         this.cnpj = loja.getCnpj();
         this.dataDeRegistro = loja.getDataDeRegistro();
+        this.produtos = loja.getProdutos();
     }
 
     public Long getId() {
@@ -76,5 +81,13 @@ public class LojaDto {
 
     public void setDataDeRegistro(LocalDateTime dataDeRegistro) {
         this.dataDeRegistro = dataDeRegistro;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

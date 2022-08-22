@@ -11,14 +11,19 @@ public class LojaFormDto {
     @NotEmpty
     @Length(max = 20)
     private String nome;
+
     @NotNull
     @NotEmpty
     @Length(max = 80)
     private String endereco;
+
     @NotNull
     @NotEmpty
     @Length(min = 18, max = 18)
     private String cnpj;
+
+    @NotNull
+    private Long idProduto;
 
     public String getNome() {
         return nome;
@@ -42,5 +47,13 @@ public class LojaFormDto {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
     }
 }

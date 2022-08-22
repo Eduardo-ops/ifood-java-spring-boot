@@ -1,23 +1,24 @@
-package br.com.stefanini.stefaninifood.dto.produto;
+package br.com.stefanini.stefaninifood.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-public class ProdutoDto {
+@Entity
+@Table(name = "produto")
+public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
+    @Column(name = "nome")
     private String nome;
-
+    @Column(name = "valor")
     private float valor;
-
+    @Column(name = "descricao")
     private String descricao;
 
-    public ProdutoDto() {
+    public Produto() {
+
     }
 
     public Integer getId() {

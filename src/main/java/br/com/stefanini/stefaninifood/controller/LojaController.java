@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class LojaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public LojaDto criarLoja(@RequestBody LojaFormDto lojaFormDto) {
+    public LojaDto criarLoja(@RequestBody @Valid LojaFormDto lojaFormDto) {
         Loja loja = this.lojaService.converterParaLoja(lojaFormDto);
         this.lojaService.criarLoja(loja);
         return new LojaDto(loja);
@@ -43,7 +44,7 @@ public class LojaController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarLoja(@PathVariable Long id, @RequestBody AtualizarLojaDto atualizarLojaDto) {
+    public void atualizarLoja(@PathVariable Long id, @RequestBody @Valid AtualizarLojaDto atualizarLojaDto) {
         Loja loja = this.lojaService.converterAtualizar(id, atualizarLojaDto);
         new LojaDto(lojaService.atualizarLoja(id, loja));
     }

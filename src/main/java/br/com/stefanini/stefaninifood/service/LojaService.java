@@ -40,7 +40,6 @@ public class LojaService {
 
     @Transactional
     public Loja criarLoja(Loja loja) {
-
         return lojaRepository.save(loja);
     }
 
@@ -60,28 +59,32 @@ public class LojaService {
         updateLoja.setId(lojaById.getId());
 
         return this.lojaRepository.save(updateLoja);
-
-//        lojaById.setNome(loja.getNome());
-//        lojaById.setRazaoSocial(loja.getRazaoSocial());
-//        lojaById.setEndereco(loja.getEndereco());
-//        lojaById.setCnpj(loja.getCnpj());
-//        return this.lojaRepository.save(lojaById);
     }
 
     @Transactional
     public Loja converterAtualizar(Long id, AtualizarLojaDto atualizarLojaDto) {
         Loja loja = buscarPorId(id);
 
-        loja.setRazaoSocial(atualizarLojaDto.getRazaoSocial());
-        loja.setEndereco(atualizarLojaDto.getEndereco());
+        if (atualizarLojaDto.getRazaoSocial().isEmpty()) {
+            loja.setRazaoSocial(loja.getRazaoSocial());
+        } else {
+            loja.setRazaoSocial(atualizarLojaDto.getRazaoSocial());
+        }
+        if (atualizarLojaDto.getEndereco().isEmpty()) {
+            loja.setEndereco(loja.getEndereco());
+        } else {
+            loja.setEndereco(atualizarLojaDto.getEndereco());
+        }
 
-        Produto produto = this.produtoRepository.findById(atualizarLojaDto.getIdProduto()).get();
-
-        List<Produto> produtos = new ArrayList<>();
-        produtos = loja.getProdutos();
-        produtos.add(produto);
-
-        loja.setProdutos(produtos);
+        if (atualizarLojaDto.getIdProduto() != null) {
+            Produto produto = this.produtoRepository.findById(atualizarLojaDto.getIdProduto()).get();
+            List<Produto> produtos = new ArrayList<>();
+            produtos = loja.getProdutos();
+            produtos.add(produto);
+            loja.setProdutos(produtos);
+        } else {
+            loja.setId(loja.getId());
+        }
 
         return loja;
     }

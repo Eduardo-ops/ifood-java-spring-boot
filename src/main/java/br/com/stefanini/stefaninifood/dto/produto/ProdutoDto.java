@@ -1,6 +1,5 @@
 package br.com.stefanini.stefaninifood.dto.produto;
 
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,7 +8,7 @@ public class ProdutoDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String nome;
 
@@ -20,11 +19,11 @@ public class ProdutoDto {
     public ProdutoDto() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

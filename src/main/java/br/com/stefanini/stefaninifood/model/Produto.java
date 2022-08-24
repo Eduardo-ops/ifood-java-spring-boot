@@ -1,10 +1,13 @@
 package br.com.stefanini.stefaninifood.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "produto")
-public class Produto {
+public class Produto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue

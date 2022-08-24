@@ -1,28 +1,39 @@
 package br.com.stefanini.stefaninifood.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "loja")
-public class Loja {
+public class Loja implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "nome")
     private String nome;
+
     @Column(name = "razao_social")
     private String razaoSocial;
+
     @Column(name = "endereco")
     private String endereco;
+
     @Column(name = "cnpj")
     private String cnpj;
-    @ManyToMany
-    @Column(name = "produtos")
-    private List<Produto> produtos;
+
+    @Column(name = "data_de_registro")
+    private LocalDateTime dataDeRegistro = LocalDateTime.now();
+
+    @ManyToMany()
+    private List<Produto> produtos = new ArrayList<Produto>();
 
     public Loja() {
     }
@@ -33,9 +44,6 @@ public class Loja {
         this.cnpj = cnpj;
         this.produtos = produtos;
     }
-
-    @Column(name = "data_de_registro")
-    private LocalDateTime dataDeRegistro = LocalDateTime.now();
 
     public Long getId() {
         return id;

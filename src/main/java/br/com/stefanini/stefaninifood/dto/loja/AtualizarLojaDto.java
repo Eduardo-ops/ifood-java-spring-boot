@@ -2,8 +2,12 @@ package br.com.stefanini.stefaninifood.dto.loja;
 
 import br.com.stefanini.stefaninifood.model.Loja;
 import br.com.stefanini.stefaninifood.model.Produto;
+import br.com.stefanini.stefaninifood.repository.ProdutoRepository;
+import br.com.stefanini.stefaninifood.service.LojaService;
 import org.hibernate.validator.constraints.Length;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AtualizarLojaDto {
@@ -23,6 +27,33 @@ public class AtualizarLojaDto {
         this.razaoSocial = loja.getRazaoSocial();
         this.endereco = loja.getEndereco();
         this.produtos = loja.getProdutos();
+    }
+
+    public Loja converterAtualizar(Long id, AtualizarLojaDto atualizarLojaDto, LojaService lojaService, ProdutoRepository produtoRepository) {
+        Loja loja = lojaService.buscarPorId(id);
+
+        if (atualizarLojaDto.getRazaoSocial().isEmpty()) {
+            loja.setRazaoSocial(loja.getRazaoSocial());
+        } else {
+            loja.setRazaoSocial(atualizarLojaDto.getRazaoSocial());
+        }
+        if (atualizarLojaDto.getEndereco().isEmpty()) {
+            loja.setEndereco(loja.getEndereco());
+        } else {
+            loja.setEndereco(atualizarLojaDto.getEndereco());
+        }
+
+        if (atualizarLojaDto.getIdProduto() != null) {
+            Produto produto = produtoRepository.findById(atualizarLojaDto.getIdProduto()).get();
+            List<Produto> produtos = new ArrayList<>();
+            produtos = loja.getProdutos();
+            produtos.add(produto);
+            loja.setProdutos(produtos);
+        } else {
+            loja.setId(loja.getId());
+        }
+
+        return loja;
     }
 
     public String getRazaoSocial() {

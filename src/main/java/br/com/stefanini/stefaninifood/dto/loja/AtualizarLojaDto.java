@@ -18,15 +18,12 @@ public class AtualizarLojaDto {
 
     private Long idProduto;
 
-    private List<Produto> produtos;
-
     public AtualizarLojaDto() {
     }
 
     public AtualizarLojaDto(Loja loja) {
         this.razaoSocial = loja.getRazaoSocial();
         this.endereco = loja.getEndereco();
-        this.produtos = loja.getProdutos();
     }
 
     public Loja converterAtualizar(Long id, AtualizarLojaDto atualizarLojaDto, LojaService lojaService, ProdutoRepository produtoRepository) {
@@ -45,10 +42,7 @@ public class AtualizarLojaDto {
 
         if (atualizarLojaDto.getIdProduto() != null) {
             Produto produto = produtoRepository.findById(atualizarLojaDto.getIdProduto()).get();
-            List<Produto> produtos = new ArrayList<>();
-            produtos = loja.getProdutos();
-            produtos.add(produto);
-            loja.setProdutos(produtos);
+            produto.setLoja(loja);
         } else {
             loja.setId(loja.getId());
         }
@@ -80,11 +74,4 @@ public class AtualizarLojaDto {
         this.idProduto = idProduto;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
 }

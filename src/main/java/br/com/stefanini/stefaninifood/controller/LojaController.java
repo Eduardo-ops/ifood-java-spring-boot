@@ -27,8 +27,8 @@ public class LojaController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<LojaDto> buscarTodasAsLojas() {
-        List<Loja> lojas = lojaService.buscarTodos();
-        return lojaService.converterListaParaLojaDto(lojas);
+        List<Loja> lojas = this.lojaService.buscarTodos();
+        return LojaDto.converterListaParaLojaDto(lojas);
     }
 
     @GetMapping("/{id}")
@@ -41,8 +41,8 @@ public class LojaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LojaDto criarLoja(@RequestBody @Valid LojaFormDto lojaFormDto) {
-        Loja loja = lojaFormDto.converterParaLoja(lojaFormDto, this.produtoRepository);
-        this.lojaService.criarLoja(loja);
+        Loja loja = lojaFormDto.converterParaLoja(lojaFormDto);
+        this.lojaService.criarLoja(lojaFormDto, loja);
         return new LojaDto(loja);
     }
 

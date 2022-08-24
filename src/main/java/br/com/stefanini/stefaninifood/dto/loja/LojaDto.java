@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LojaDto {
 
@@ -33,6 +34,10 @@ public class LojaDto {
         this.cnpj = loja.getCnpj();
         this.dataDeRegistro = loja.getDataDeRegistro();
         this.produtos = loja.getProdutos();
+    }
+
+    public static List<LojaDto> converterListaParaLojaDto(List<Loja> lojas) {
+        return lojas.stream().map(LojaDto::new).collect(Collectors.toList());
     }
 
     public Long getId() {

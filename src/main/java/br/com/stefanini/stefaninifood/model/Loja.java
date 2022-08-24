@@ -1,16 +1,13 @@
 package br.com.stefanini.stefaninifood.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "loja")
-public class Loja implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Loja {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,17 +29,16 @@ public class Loja implements Serializable {
     @Column(name = "data_de_registro")
     private LocalDateTime dataDeRegistro = LocalDateTime.now();
 
-    @ManyToMany()
+    @OneToMany(mappedBy = "loja", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<Produto>();
 
     public Loja() {
     }
 
-    public Loja(String nome, String endereco, String cnpj, List<Produto> produtos) {
+    public Loja(String nome, String endereco, String cnpj) {
         this.nome = nome;
         this.endereco = endereco;
         this.cnpj = cnpj;
-        this.produtos = produtos;
     }
 
     public Long getId() {

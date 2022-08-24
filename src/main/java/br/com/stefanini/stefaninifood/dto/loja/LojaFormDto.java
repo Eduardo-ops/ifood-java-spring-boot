@@ -1,16 +1,10 @@
 package br.com.stefanini.stefaninifood.dto.loja;
 
 import br.com.stefanini.stefaninifood.model.Loja;
-import br.com.stefanini.stefaninifood.model.Produto;
-import br.com.stefanini.stefaninifood.repository.ProdutoRepository;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LojaFormDto {
 
@@ -32,11 +26,8 @@ public class LojaFormDto {
     @NotNull
     private Long idProduto;
 
-    public Loja converterParaLoja(LojaFormDto lojaFormDto, ProdutoRepository produtoRepository) {
-        List<Produto> produtos = new ArrayList<>();
-        Produto produto = produtoRepository.findById(lojaFormDto.getIdProduto()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
-        produtos.add(produto);
-        return new Loja(lojaFormDto.getNome(), lojaFormDto.getEndereco(), lojaFormDto.getCnpj(), produtos);
+    public Loja converterParaLoja(LojaFormDto lojaFormDto) {
+        return new Loja(lojaFormDto.getNome(), lojaFormDto.getEndereco(), lojaFormDto.getCnpj());
     }
 
     public String getNome() {

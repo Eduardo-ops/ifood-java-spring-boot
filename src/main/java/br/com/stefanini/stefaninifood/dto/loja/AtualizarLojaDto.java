@@ -6,10 +6,6 @@ import br.com.stefanini.stefaninifood.repository.ProdutoRepository;
 import br.com.stefanini.stefaninifood.service.LojaService;
 import org.hibernate.validator.constraints.Length;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-
 public class AtualizarLojaDto {
     @Length(max = 40)
     private String razaoSocial;

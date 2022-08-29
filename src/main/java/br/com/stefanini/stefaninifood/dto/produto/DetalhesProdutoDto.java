@@ -1,16 +1,9 @@
 package br.com.stefanini.stefaninifood.dto.produto;
 
-import br.com.stefanini.stefaninifood.model.Loja;
 import br.com.stefanini.stefaninifood.model.Produto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public class DetalhesProdutoDto {
 
-public class ProdutoDto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -19,14 +12,11 @@ public class ProdutoDto {
 
     private String descricao;
 
-    private Loja loja;
-
-    public ProdutoDto() {
-    }
-
-    public ProdutoDto(Produto produto) {
+    public DetalhesProdutoDto(Produto produto) {
+        this.id = produto.getId();
         this.nome = produto.getNome();
         this.valor = produto.getValor();
+        this.descricao = produto.getDescricao();
     }
 
     public Long getId() {
@@ -59,13 +49,5 @@ public class ProdutoDto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Loja getLoja() {
-        return loja;
-    }
-
-    public void setLoja(Loja loja) {
-        this.loja = loja;
     }
 }

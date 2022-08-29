@@ -1,7 +1,6 @@
 package br.com.stefanini.stefaninifood.conf;
 
 import br.com.stefanini.stefaninifood.dto.erro.ErroDeFormularioDto;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -34,4 +33,5 @@ public class ErroDeValidacaoHandler {
         });
         return erroDeFormularioDto;
     }
+
 }

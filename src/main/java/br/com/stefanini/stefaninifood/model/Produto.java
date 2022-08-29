@@ -1,13 +1,16 @@
 package br.com.stefanini.stefaninifood.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "produto")
-public class Produto {
+public class Produto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "nome")
@@ -23,6 +26,11 @@ public class Produto {
 
     public Produto() {
 
+    }
+
+    public Produto(String nome, float valor) {
+        this.nome = nome;
+        this.valor = valor;
     }
 
     public Long getId() {
@@ -57,6 +65,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
+//    Se atentar a esse método
 //    public Loja getLoja() {
 //        return loja;
 //    }

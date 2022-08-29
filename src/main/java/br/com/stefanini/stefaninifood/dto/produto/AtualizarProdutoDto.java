@@ -1,40 +1,36 @@
 package br.com.stefanini.stefaninifood.dto.produto;
 
-import br.com.stefanini.stefaninifood.model.Loja;
 import br.com.stefanini.stefaninifood.model.Produto;
+import br.com.stefanini.stefaninifood.service.ProdutoService;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-public class ProdutoDto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class AtualizarProdutoDto {
 
     private String nome;
-
     private float valor;
-
     private String descricao;
 
-    private Loja loja;
+    public AtualizarProdutoDto() {
 
-    public ProdutoDto() {
     }
 
-    public ProdutoDto(Produto produto) {
+    public AtualizarProdutoDto(Produto produto) {
         this.nome = produto.getNome();
         this.valor = produto.getValor();
+        this.descricao = produto.getDescricao();
     }
 
-    public Long getId() {
-        return id;
+    public Produto converterAtualizar(Long id, AtualizarProdutoDto atualizarProdutoDto, ProdutoService produtoService) {
+        Produto produto = produtoService.buscarPorId(id);
+
+        produto.setNome(atualizarProdutoDto.getNome());
+        produto.setValor(atualizarProdutoDto.getValor());
+        produto.setDescricao(atualizarProdutoDto.getDescricao());
+
+        return produto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Produto converter() {
+        return new Produto();
     }
 
     public String getNome() {
@@ -59,13 +55,5 @@ public class ProdutoDto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Loja getLoja() {
-        return loja;
-    }
-
-    public void setLoja(Loja loja) {
-        this.loja = loja;
     }
 }
